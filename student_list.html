@@ -49,7 +49,7 @@
     <br>
 
     <!-- Use v-on to call addNewStudent function DONE -->
-    <button v-on:click="addNewStudent"id="add-student">Add Student</button>  
+    <button v-on:click="addStudent"id="add-student">Add Student</button>  
     
 
     <h2>Student List</h2>
@@ -65,14 +65,15 @@
 
     <ul id="student-list">
         <!-- use v-for to create li elements, one for each student -->
-        <li v-for="student in studentList" v-on:click="selectOrUnselectStudent(student)" v-bind:class="{ selected: student.selected }">
+        <!-- <li v-for="student in studentList" v-on:click="selectOrUnselectStudent(student)" v-bind:class="{ selected: student.selected }"> -->
+        <li v-for="student in studentList">
             <!-- Modify this to display the student's data more neatly - display their name, ID and GPA. DONE -->
-            <li>{{ student.name }}</li>
+            <li>{{ student}}</li>
             <li>{{ student.id }}</li>
             <li>{{ student.gpa }}</li>
             <!-- this will display the student's data neatly-->
             <!-- for example "Beyonce Knowles, id: aa1234bb, GPA 3.8" -->
-            {{ student }}
+            <!-- Name: {{ student.name }},ID: {{ student.id}}, GPA: {{ student.gpa}} -->
         </li>
     </ul>
 
@@ -80,16 +81,6 @@
     <button v-on:click="removeSelectedStudents" id="remove-selected-students">Remove selected students</button>
 
 </div>  <!-- end of div#app -->
-
-
-
-
-
-
-
-
-
-
 
 
 <script>
@@ -116,9 +107,9 @@
         * When the Remove selected students is clicked, remove all selected students. 
         
     */
-   const studentCount = computed( () => {
-    return studentList.value.length // this will display the number of students 
-   })
+//    const studentCount = computed( () => {
+//     return studentList.value.length // this will display the number of students 
+//    })
 
 
     const { createApp, ref, computed } = Vue 
@@ -127,11 +118,12 @@
         setup() {
 
             // Create a new ref studentList. This will be an array. The array can be empty, or you can create an example student or students if you like. DONE
+          //  {name: 'Beyonce Knowles', id: 'aa1234bb', gpa: 3.8, selected: false}
             const studentList = ref([])
             // Create a new ref newStudentName, initially an empty string DONE
             const newStudentName = ref('')
             // Create a new ref newStudentId, initially an empty string DONE
-            const newStudentID = ref('')
+            const newStudentId = ref('')
             // Create a new ref newStudentGpa, initially an empty string DONE
             const newStudentGPA = ref('')
 
@@ -175,15 +167,21 @@
                     // Set id to newStudentId's value 
                     // Set gpa to newStudentGpa's value
                     // Set selected to false 
-                    let student = {
+                    let newStudent = {
                         name: newStudentName.value, // this will change it to the current value by adding 
                         id: newStudentID.value,
                         gpa: newStudentGPA.value,
                         present: false
                     }
+                    // let student = {
+                    //     name: newStudentName.value, // this will change it to the current value by adding 
+                    //     id: newStudentID.value,
+                    //     gpa: newStudentGPA.value,
+                    //     present: false
+                    // }
 
                     // Add this new object to the end of studentList DONE
-                    studentList.value.push(student)
+                    studentList.value.push(newStudent)
 
                     // Set the value of newStudentName, newStudentId, newStudentGpa to empty strings, to clear the form DONE
                     newStudentName.value = '' // this will set the value of newStudentName, ID, GPA to empty strings
@@ -196,9 +194,9 @@
                 // Remove all students with selected = true from the studentList. You can do this with filter, DONE
                 // or you can make a new empty array, loop over the studentList, and copy all selected = false students
                 // to the new list, then replace the value of studentList with the new array DONE
-                if (confirm(`Delete ${removeSelectedStudents.name}?`)) {
-                    studentList.value = studentList.value.filter( student => student != removeSelectedStudents)
-                }
+                // if (confirm(`Delete ${removeSelectedStudents.name}?`)) {
+                //     studentList.value = studentList.value.filter( student => student != removeSelectedStudents)
+                // }
                 // this will remove all students that are selected true from the studentList
             }
 
@@ -214,7 +212,7 @@
                 // List all the refs and functions and computed properties DONE
                 studentList,
                 newStudentName,
-                newStudentID,
+                newStudentId,
                 newStudentGPA,
                 addStudent,
                 removeSelectedStudents,
