@@ -68,9 +68,9 @@
         <!-- <li v-for="student in studentList" v-on:click="selectOrUnselectStudent(student)" v-bind:class="{ selected: student.selected }"> -->
         <li v-for="student in studentList">
             <!-- Modify this to display the student's data more neatly - display their name, ID and GPA. DONE -->
-            <li>{{ student}}</li>
-            <li>{{ student.id }}</li>
-            <li>{{ student.gpa }}</li>
+            {{ student}}
+            {{ student.id }}
+            {{ student.gpa }}
             <!-- this will display the student's data neatly-->
             <!-- for example "Beyonce Knowles, id: aa1234bb, GPA 3.8" -->
             <!-- Name: {{ student.name }},ID: {{ student.id}}, GPA: {{ student.gpa}} -->
@@ -146,8 +146,8 @@
                     errors.value.push('Student Name must be entered') // this will show an error message that the Name must be entered if not entered
                 }
                 // Read the value from newStudentId. If it is empty, add an error message to the end of the errors ref. DONE
-                if (newStudentID.value.length == 0) {
-                    errros.value.push('Student ID must entered') // this will show an error message that the ID must be entered if not entered
+                if (newStudentId.value.length == 0) {
+                    errors.value.push('Student ID must entered') // this will show an error message that the ID must be entered if not entered
                 }
                 // Read the value from newStudentGPA. If it is empty, add an error message to the end of the errors ref. DONE
                 if (newStudentGPA.value.length == 0) {
@@ -169,7 +169,7 @@
                     // Set selected to false 
                     let newStudent = {
                         name: newStudentName.value, // this will change it to the current value by adding 
-                        id: newStudentID.value,
+                        id: newStudentId.value,
                         gpa: newStudentGPA.value,
                         present: false
                     }
@@ -185,7 +185,7 @@
 
                     // Set the value of newStudentName, newStudentId, newStudentGpa to empty strings, to clear the form DONE
                     newStudentName.value = '' // this will set the value of newStudentName, ID, GPA to empty strings
-                    newStudentID.value = ''
+                    newStudentId.value = ''
                     newStudentGPA.value = ''
                 }
             }
@@ -194,9 +194,9 @@
                 // Remove all students with selected = true from the studentList. You can do this with filter, DONE
                 // or you can make a new empty array, loop over the studentList, and copy all selected = false students
                 // to the new list, then replace the value of studentList with the new array DONE
-                // if (confirm(`Delete ${removeSelectedStudents.name}?`)) {
-                //     studentList.value = studentList.value.filter( student => student != removeSelectedStudents)
-                // }
+                if (confirm(`Delete ${removeSelectedStudents.name}?`)) {
+                    studentList.value = studentList.value.filter( student => student != removeSelectedStudents)
+                }
                 // this will remove all students that are selected true from the studentList
             }
 
