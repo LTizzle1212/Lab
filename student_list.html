@@ -66,11 +66,10 @@
     <ul id="student-list">
         <!-- use v-for to create li elements, one for each student -->
         <!-- <li v-for="student in studentList" v-on:click="selectOrUnselectStudent(student)" v-bind:class="{ selected: student.selected }"> -->
-        <li v-for="student in studentList">
+        <li v-for="student in studentList" v-on:click="selectedOrUnselectStudent(student)" v-bind:class="{ selected: student.selected}"></li>    ">
             <!-- Modify this to display the student's data more neatly - display their name, ID and GPA. DONE -->
-            {{ student}}
-            {{ student.id }}
-            {{ student.gpa }}
+            ID: {{ student.id }}
+            GPA: {{ student.gpa }}
             <!-- this will display the student's data neatly-->
             <!-- for example "Beyonce Knowles, id: aa1234bb, GPA 3.8" -->
             <!-- Name: {{ student.name }},ID: {{ student.id}}, GPA: {{ student.gpa}} -->
@@ -194,8 +193,9 @@
                 // Remove all students with selected = true from the studentList. You can do this with filter, DONE
                 // or you can make a new empty array, loop over the studentList, and copy all selected = false students
                 // to the new list, then replace the value of studentList with the new array DONE
-                if (confirm(`Delete ${removeSelectedStudents.name}?`)) {
-                    studentList.value = studentList.value.filter( student => student != removeSelectedStudents)
+                if (confirm(`Delete ${listWithoutSelectedStudents.name}?`)) {
+                    const listWithoutSelectedStudents = []
+                        studentList.value.forEach( s=> { })
                 }
                 // this will remove all students that are selected true from the studentList
             }
